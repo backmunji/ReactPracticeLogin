@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'; //
 
 function Home() {
   const [username, setUsername] = useState('');
@@ -12,6 +13,35 @@ function Home() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+  const userData = {
+    username,
+    password};
+       
+      try {
+          console.log(username, password);
+        const response = await axios.post('http://localhost:3003/login', userData);
+  
+
+        const data = response.data;
+        // 회원가입 성공 시 처리
+        if (response.status === 201) {
+          alert('로그인이 완료되었습니다.');
+
+
+          window.location.href='/2';
+          localStorage.setItem('id',data.id );
+          localStorage.setItem('username', data.username);
+          // 원하는 리디렉션 또는 다른 작업 수행
+        }
+      } catch (error) {
+        console.error('로그인 오류:', error);
+        alert('로그인에 실패했습니다.');
+      }
+    };
 
   return (
     <div>
@@ -36,7 +66,7 @@ function Home() {
           onChange={handlePasswordChange}
         />
       </div>
-      <button>로그인</button>
+      <button onClick={handleSubmit}>로그인</button>
       <Link to="/1">회원가입</Link>
     </div>
   );

@@ -1,29 +1,37 @@
-// MyPage.js
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function MyPage() {
-  const [profile, setProfile] = useState({}); // 프로필 정보를 저장할 상태
+  const [profile, setProfile] = useState({});
+  const username = localStorage.getItem('username');
 
-  // 서버에서 프로필 정보 가져오기 (실제로는 서버 요청 필요)
   useEffect(() => {
-    // 실제로는 서버에서 데이터를 가져오는 API 요청을 보내야 합니다.
-    // 이 예제에서는 더미 데이터를 사용합니다.
     const dummyProfile = {
       username: '사용자 이름',
     };
     setProfile(dummyProfile);
   }, []);
 
+  // 로그아웃 버튼을 클릭할 때 실행되는 함수
+  const handleLogout = () => {
+    // 로컬 스토리지에서 사용자 정보 제거
+    localStorage.removeItem('username');
+
+    // 로그아웃 알림
+    alert('로그아웃 되었습니다.');
+    
+    // 원하는 페이지로 리디렉션
+    // 예를 들어, 홈 페이지로 이동하려면 다음과 같이 사용합니다.
+     window.location.href = '/';
+  };
+
   return (
     <div>
       <h2>마이페이지</h2>
       <div>
-        <p>아이디: {profile.username}</p>
+        <p>아이디: {username}</p>
       </div>
-      <button onClick={() => alert('로그아웃 되었습니다.')}>로그아웃</button>
-      <Link to="/">홈으로 돌아가기</Link>
+      <button onClick={handleLogout}>로그아웃</button>
     </div>
   );
 }

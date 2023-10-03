@@ -47,6 +47,30 @@ app.post('/register', (req, res) => {
   );
 });
 
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  console.log(username);
+  console.log(password);
+
+  db.query(
+    'SELECT id, username, password FROM users WHERE username = ? AND password = ?',
+    [username, password],
+    (err, results) => {
+      if (err) {
+        console.error('Error inserting user:', err);
+        res.status(500).json({ message: '로그인이 실패했습니다.' });
+        return;
+      }
+      const user = results[0];
+      const id = user.id;
+      const username = user.username;
+      console.log({id},{username});
+
+      res.status(201).json({ message: '로그인이 성공적으로 완료되었습니다.' , id , username});
+    }
+  );
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
