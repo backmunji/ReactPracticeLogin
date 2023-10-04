@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // axios 라이브러리 추가
+import axios from 'axios'; 
+import './About.css';
 
 function About() {
   const [username, setUsername] = useState('');
@@ -39,10 +40,10 @@ function About() {
 
   return (
     <div>
-      <h2>회원가입 페이지</h2>
+      <h1>회원가입 페이지</h1><br></br>
       
         <div>
-          <label htmlFor="username">아이디:</label>
+          <label htmlFor="username">아이디</label>
           <input
             type="text"
             id="username"
@@ -52,7 +53,7 @@ function About() {
           />
         </div>
         <div>
-          <label htmlFor="password">비밀번호:</label>
+          <label htmlFor="password">비밀번호</label>
           <input
             type="password"
             id="password"
