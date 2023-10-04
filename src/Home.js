@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; //
+import axios from 'axios'; 
+import './Home.css';
 
 function Home() {
   const [username, setUsername] = useState('');
@@ -45,9 +46,9 @@ function Home() {
 
   return (
     <div>
-      <h2>로그인 페이지</h2>
+      <h1 className='log'>로그인 페이지</h1><br></br>
       <div>
-        <label htmlFor="username">아이디:</label>
+        <label htmlFor="username">아이디</label>
         <input
           type="text"
           id="username"
@@ -57,7 +58,7 @@ function Home() {
         />
       </div>
       <div>
-        <label htmlFor="password">비밀번호:</label>
+        <label htmlFor="password">비밀번호</label>
         <input
           type="password"
           id="password"
